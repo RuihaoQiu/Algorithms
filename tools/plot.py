@@ -36,7 +36,6 @@ def plot_regressor(reg):
 
     reg.fit(X, y)
     y_pred = reg.predict(X_test)
-    y_pred
 
     fig, ax = plt.subplots(1, 1, figsize=(8, 6))
     ax.set_xlabel('feature 1', color='gray')
