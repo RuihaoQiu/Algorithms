@@ -3,6 +3,7 @@
 from sklearn.datasets.samples_generator import make_blobs
 import matplotlib.pyplot as plt
 import numpy as np
+import random
 plt.style.use('ggplot')
 
 def plot_class(clf):
@@ -25,4 +26,21 @@ def plot_class(clf):
     zz = clf.predict(X_test)
     zz = zz.reshape(xx.shape)
     ax.contourf(xx, yy, zz, cmap='Paired', alpha=0.4, zorder=1)
+    plt.show()
+
+
+def plot_regressor(reg):
+    y = np.array([[i**2 + random.uniform(0, 1)*20**2 for i in range(50)]]).T
+    X = np.array([[i for i in range(50)]]).T
+    X_test = np.array([[i for i in range(50)]]).T
+
+    reg.fit(X, y)
+    y_pred = reg.predict(X_test)
+    y_pred
+
+    fig, ax = plt.subplots(1, 1, figsize=(8, 6))
+    ax.set_xlabel('feature 1', color='gray')
+    ax.plot(X, y, 'o', markersize=8, label="y_train")
+    ax.plot(X, y_pred, lw=3, label="y_pred")
+    ax.legend()
     plt.show()
