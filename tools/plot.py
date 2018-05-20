@@ -1,14 +1,15 @@
 ## Model and visulization
 
-from sklearn.datasets.samples_generator import make_blobs
+from sklearn.datasets.samples_generator import make_blobs, make_moons
 import matplotlib.pyplot as plt
 import numpy as np
 import random
 plt.style.use('ggplot')
 
 def plot_class(clf):
-    X_train, y_train = make_blobs(n_samples=200, centers=2,
-                  random_state=2, cluster_std=2.50)
+    #X_train, y_train = make_blobs(n_samples=200, centers=2,
+    #              random_state=2, cluster_std=2.50)
+    X_train, y_train = make_moons(200, noise=0.20)
     
     fig, ax = plt.subplots(1, 1, figsize=(8, 6))
     ax.set_xlabel('feature 1', color='gray')
