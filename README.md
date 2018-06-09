@@ -22,10 +22,13 @@ Implement the most important algorithms for optimization or machine learning fro
 
 - Logistic Regression
 
+- Neural network
 
   ​
 
 **Others**
+
+- Sorting algorithms
 
 - Graph search algorithm
 
