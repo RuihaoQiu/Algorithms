@@ -16,11 +16,9 @@ Implement the most important algorithms for optimization or machine learning fro
 
 - Gradient boosting
 
-- eXtreme Gradient Boosting
+- Linear regression
 
-- Linear Regression
-
-- Logistic Regression
+- Logistic regression
 
 - Neural network
 
@@ -28,8 +26,8 @@ Implement the most important algorithms for optimization or machine learning fro
 
 **Others**
 
+- Search algorithms
 - Sorting algorithms
-
 - Graph search algorithm
 
 
