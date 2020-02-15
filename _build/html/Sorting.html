@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sorting &mdash; algorithms  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Python notes" href="index.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> algorithms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sorting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simple-sorts">Simple sorts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#efficient-sorts">Efficient sorts</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">algorithms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Sorting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Sorting.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sorting">
+<h1>Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h1>
+<p>Some common sorting algorithms.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">A</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="section" id="simple-sorts">
+<h2>Simple sorts<a class="headerlink" href="#simple-sorts" title="Permalink to this headline">¶</a></h2>
+<p>Complexity - O(N^2)</p>
+<p><strong>bubble sort</strong> - pair exchange until sorted</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+  <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
+  <span class="k">while</span> <span class="n">changed</span><span class="p">:</span>
+    <span class="n">changed</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+      <span class="k">if</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
+  <span class="k">return</span> <span class="n">X</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before sort: &quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After sort: &quot;</span><span class="p">,</span> <span class="n">bubble_sort</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Before sort:  [7, 5, 1, 3, 6, 9, 0, 8, 2, 4]<br />After sort:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</p>
+<p><strong>insertion sort</strong> - from left to right, insert next element to the sorted array</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">insertion_sort</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">key</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
+      <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+      <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+      <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+  <span class="k">return</span> <span class="n">X</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before sort: &quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After sort: &quot;</span><span class="p">,</span> <span class="n">insertion_sort</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Before sort:  [5, 0, 3, 4, 9, 8, 7, 2, 1, 6]<br />After sort:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</p>
+<p><strong>selection sort</strong> - from left to right, find the minimum of the right part stack to the left</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">selection_sort</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">mn</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">)</span> <span class="c1">## find the minimum for i to len(X)</span>
+    <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">mn</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">mn</span><span class="p">],</span> <span class="n">e</span>
+  <span class="k">return</span> <span class="n">X</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before sort: &quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After sort: &quot;</span><span class="p">,</span> <span class="n">selection_sort</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Before sort:  [2, 0, 1, 9, 3, 4, 6, 5, 8, 7]<br />After sort:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</p>
+</div>
+<div class="section" id="efficient-sorts">
+<h2>Efficient sorts<a class="headerlink" href="#efficient-sorts" title="Permalink to this headline">¶</a></h2>
+<p>Complexity - O(NlogN)</p>
+<p><strong>quick sort</strong> - recursively choose pivots, put the smaller values at left and the larger at right. Worst case may cause <em>O(N**2)</em>, but normally random choose of pivot will cause <em>O(N</em>logN)*</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quick_sort</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+  <span class="n">less</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">pivots</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">more</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">arr</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="p">:</span>
+        <span class="n">less</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+      <span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="p">:</span>
+        <span class="n">more</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">pivots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">less</span> <span class="o">=</span> <span class="n">quickSort</span><span class="p">(</span><span class="n">less</span><span class="p">)</span>
+    <span class="n">more</span> <span class="o">=</span> <span class="n">quickSort</span><span class="p">(</span><span class="n">more</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">less</span> <span class="o">+</span> <span class="n">pivots</span> <span class="o">+</span> <span class="n">more</span>
+</pre></div>
+</div>
+<p><strong>merge sort</strong> - sequentially append maximum and minimum the two list, then append them</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+  <span class="n">start</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">end</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">start</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">end</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="n">X</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">X</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">X</span><span class="p">:</span> <span class="n">start</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="n">end</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+  <span class="k">return</span> <span class="n">start</span> <span class="o">+</span> <span class="n">end</span>
+</pre></div>
+</div>
+<p><strong>heap sort</strong> - continuesly creat max heap to find the largest value and stack it</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">heapify</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">heap_size</span><span class="p">):</span>
+  <span class="n">mx</span> <span class="o">=</span> <span class="n">index</span>
+  <span class="n">l</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">2</span>
+  <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">heap_size</span> <span class="ow">and</span> <span class="n">X</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">X</span><span class="p">[</span><span class="n">mx</span><span class="p">]:</span>
+    <span class="n">mx</span> <span class="o">=</span> <span class="n">l</span>
+  <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">heap_size</span> <span class="ow">and</span> <span class="n">X</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">X</span><span class="p">[</span><span class="n">mx</span><span class="p">]:</span>
+    <span class="n">mx</span> <span class="o">=</span> <span class="n">r</span>
+  <span class="k">if</span> <span class="n">mx</span> <span class="o">!=</span> <span class="n">index</span><span class="p">:</span>
+    <span class="n">X</span><span class="p">[</span><span class="n">mx</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">mx</span><span class="p">]</span>
+    <span class="n">heapify</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">heap_size</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">heap_sort</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+  <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">heapify</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">heapify</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">X</span>
+</pre></div>
+</div>
+<p><strong>Reference</strong></p>
+<ul class="simple">
+<li><p>https://en.wikipedia.org/wiki/Sorting_algorithm#Simple_sorts</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Python notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Ruihao Qiu.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

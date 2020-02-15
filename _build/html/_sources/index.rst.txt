@@ -1,0 +1,9 @@
+Python notes
+================================
+This document includes the practical knowledge, concepts, ideas and tricks of Python that often appear in my daily data engineering/science work.
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+
+   Sorting
