@@ -26,20 +26,20 @@ def make_graph(m, n):
 graph = make_graph(m, n)
 graph
 ```
-{(0, 0): [(1, 0), (0, 1)],  
- (0, 1): [(1, 1), (0, 2)],  
- (0, 2): [(1, 2), (0, 3)],  
- (0, 3): [(1, 3)],  
- (1, 0): [(2, 0), (1, 1)],  
- (1, 1): [(2, 1), (1, 2)],  
- (1, 2): [(2, 2), (1, 3)],  
- (1, 3): [(2, 3)],  
- (2, 0): [(3, 0), (2, 1)],  
- (2, 1): [(3, 1), (2, 2)],  
- (2, 2): [(3, 2), (2, 3)],  
- (2, 3): [(3, 3)],  
- (3, 0): [(3, 1)],  
- (3, 1): [(3, 2)],  
+{(0, 0): [(1, 0), (0, 1)],  <br/>
+ (0, 1): [(1, 1), (0, 2)],  <br/>
+ (0, 2): [(1, 2), (0, 3)],  <br/>
+ (0, 3): [(1, 3)],  <br/>
+ (1, 0): [(2, 0), (1, 1)],  <br/>
+ (1, 1): [(2, 1), (1, 2)],  <br/>
+ (1, 2): [(2, 2), (1, 3)],  <br/>
+ (1, 3): [(2, 3)],  <br/>
+ (2, 0): [(3, 0), (2, 1)],  <br/>
+ (2, 1): [(3, 1), (2, 2)],  <br/>
+ (2, 2): [(3, 2), (2, 3)],  <br/>
+ (2, 3): [(3, 3)],  <br/>
+ (3, 0): [(3, 1)],  <br/>
+ (3, 1): [(3, 2)],  <br/>
  (3, 2): [(3, 3)]}
 
 ### Find a path
@@ -124,9 +124,9 @@ print("Average D for each path:\n", np.array(D_path))
 ```
 Total and average deviation of a path: 1.00, 0.17  
 Average D for each path:
- [ 0.5         0.38888889  0.27777778  0.27777778  0.27777778  0.16666667
-  0.16666667  0.16666667  0.16666667  0.27777778  0.27777778  0.16666667
-  0.16666667  0.16666667  0.16666667  0.27777778  0.27777778  0.27777778
+ [ 0.5         0.38888889  0.27777778  0.27777778  0.27777778  0.16666667<br/>
+  0.16666667  0.16666667  0.16666667  0.27777778  0.27777778  0.16666667<br/>
+  0.16666667  0.16666667  0.16666667  0.27777778  0.27777778  0.27777778<br/>
   0.38888889  0.5       ]
 
 **Calculate probability for each step**
@@ -170,7 +170,7 @@ std = np.sqrt(np.sum(np.multiply(prob_path, (D_path-mean)**2)))
 print("The mean and standard deviation of D mean: {0:12.10f}, {1:12.10f}.".format(mean, std))
 ```
 
-## Sampling method
+### Sampling method
 When m, n is large, we are not able to search all path, therefore, we use random sampling method instead, to approximate the statistics we are interested in.
 
 ```
@@ -196,6 +196,6 @@ def sampling_method(m,n, n_steps=10000):
 
 sampling_method(30, 30)
 ```
-Use sampling method, when m=30, n=30  
-The mean and standard deviation of D: 0.1224730000, 0.1033561687.  
+Use sampling method, when m=30, n=30 <br/>
+The mean and standard deviation of D: 0.1224730000, 0.1033561687.<br/>
 Conditional probability that D is greater than 0.6 given that it is greater than 0.2: 0.0032789799.

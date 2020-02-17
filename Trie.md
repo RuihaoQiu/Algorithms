@@ -31,7 +31,7 @@ suggest("hel", key_trie)
 ['helps', 'helping', 'help', 'hell', 'hel', 'hello']
 
 **Practical example - location autocomplete**  
-Work with world cities data, [find here]( https://simplemaps.com/data/world-cities)
+Work with world cities data, [find here](https://simplemaps.com/data/world-cities)
 ```
 import pandas as pd
 input_file = "data/worldcities.xlsx"
@@ -52,32 +52,32 @@ key_trie = make_trie(input_df)
 ```
 suggest("par", key_trie, top_n=5)
 ```
-['paris, île-de-france, france',  
- 'parbhani, mahārāshtra, india',  
- 'paraná, entre ríos, argentina',  
- 'paramaribo, paramaribo, suriname',  
- 'paradise, nevada, united states']  
+['paris, île-de-france, france',<br/>
+ 'parbhani, mahārāshtra, india',<br/>
+ 'paraná, entre ríos, argentina',<br/>
+ 'paramaribo, paramaribo, suriname',<br/>
+ 'paradise, nevada, united states']<br/>
 *(**find city called 'paradise' in US)*
 
 ```
 suggest("sha", key_trie, top_n=5)
 ```
-['shanghai, shanghai, china',  
- 'shangqiu, henan, china',  
- 'shantou, guangdong, china',  
- 'shangrao, jiangxi, china',  
+['shanghai, shanghai, china',<br/>
+ 'shangqiu, henan, china',<br/>
+ 'shantou, guangdong, china',<br/>
+ 'shangrao, jiangxi, china',<br/>
  'sharjah, ash shāriqah, united arab emirates']
 
 ```
 suggest("ber", key_trie, top_n=5)
 ```
-['berlin, berlin, germany',  
- 'bern, bern, switzerland',  
- 'bertoua, est, cameroon',  
- 'bergen, hordaland, norway',  
+['berlin, berlin, germany',<br/>
+ 'bern, bern, switzerland',<br/>
+ 'bertoua, est, cameroon',<br/>
+ 'bergen, hordaland, norway',<br/>
  'bergamo, lombardy, italy']
 
-To be notice, here we use the population as the score to sort the suggestions. What need to be improved is just to re compute the score by consider more factors.
+To be notice, here we use the population as the score to sort the suggestions. What need to be improved is just to re compute the scores by consider more factors.
 
 
 ### Feature extraction
@@ -115,9 +115,9 @@ regex = make_regex(small_keys)
 %%time
 regex.findall(text)
 ```
-CPU times: user 14 µs, sys: 0 ns, total: 14 µs  
-Wall time: 17.9 µs  
-['Paris', 'Munich', 'Berlin']  
+CPU times: user 14 µs, sys: 0 ns, total: 14 µs<br/>
+Wall time: 17.9 µs<br/>
+['Paris', 'Munich', 'Berlin']
 
 **Large key set**
 ```
@@ -131,14 +131,14 @@ regex_large = make_regex(large_keys)
 %%time
 regex_large.findall(text)
 ```
-CPU times: user 64 µs, sys: 1e+03 ns, total: 65 µs  
-Wall time: 67.7 µs  
+CPU times: user 64 µs, sys: 1e+03 ns, total: 65 µs<br/>
+Wall time: 67.7 µs<br/>
 ['Amsterdam', 'Van', 'Paris', 'Munich', 'Berlin']
 
-Super fast! However, we have a wrong result Van, which is not a city. To avoid this ambiguity, more sophistical method are required.
+Super fast! However, we have a wrong result Van, which is not a city. To avoid this ambiguity, more sophistical methods are required.
 
 **References**
-- Intro to Trie: https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014
-- pytrie: https://pytrie.readthedocs.io/en/latest/
-- Trie script: https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0
-- City data : https://simplemaps.com/data/world-cities
+- Intro to Trie: [https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014](https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014)
+- pytrie package: [https://pytrie.readthedocs.io/en/latest/](https://pytrie.readthedocs.io/en/latest/)
+- Trie script: [https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0](https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0)
+- City data : [https://simplemaps.com/data/world-cities](https://simplemaps.com/data/world-cities)

@@ -27,7 +27,7 @@ def bubble_sort(X):
 print("Before sort: ", A)
 print("After sort: ", bubble_sort(A))
 ```
-Before sort:  [7, 5, 1, 3, 6, 9, 0, 8, 2, 4]  
+Before sort:  [7, 5, 1, 3, 6, 9, 0, 8, 2, 4] <br/>
 After sort:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 **insertion sort** - from left to right, insert next element to the sorted array
@@ -62,7 +62,7 @@ def selection_sort(X):
 print("Before sort: ", A)
 print("After sort: ", selection_sort(A))
 ```
-Before sort:  [2, 0, 1, 9, 3, 4, 6, 5, 8, 7]  
+Before sort:  [2, 0, 1, 9, 3, 4, 6, 5, 8, 7]  <br/>
 After sort:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
@@ -136,4 +136,4 @@ def heap_sort(X):
 ```
 
 **Reference**
-- https://en.wikipedia.org/wiki/Sorting_algorithm#Simple_sorts
+- [https://en.wikipedia.org/wiki/Sorting_algorithm#Simple_sorts](https://en.wikipedia.org/wiki/Sorting_algorithm#Simple_sorts)

@@ -81,7 +81,6 @@
 <li class="toctree-l1"><a class="reference internal" href="Sorting.html">Sorting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Searching.html">Searching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Graph-search.html">Graph searching algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Graph-search.html#sampling-method">Sampling method</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Trie</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#autocomplete">Autocomplete</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#feature-extraction">Feature extraction</a></li>
@@ -199,16 +198,29 @@ It is super powerful for some tasks like autocomplete and feature extraction in 
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">suggest</span><span class="p">(</span><span class="s2">&quot;par&quot;</span><span class="p">,</span> <span class="n">key_trie</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>[‘paris, île-de-france, france’,<br />’parbhani, mahārāshtra, india’,<br />’paraná, entre ríos, argentina’,<br />’paramaribo, paramaribo, suriname’,<br />’paradise, nevada, united states’]<br />*(*<em>find city called ‘paradise’ in US)</em></p>
+<p>[‘paris, île-de-france, france’,<br/>
+‘parbhani, mahārāshtra, india’,<br/>
+‘paraná, entre ríos, argentina’,<br/>
+‘paramaribo, paramaribo, suriname’,<br/>
+‘paradise, nevada, united states’]<br/>
+*(*<em>find city called ‘paradise’ in US)</em></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">suggest</span><span class="p">(</span><span class="s2">&quot;sha&quot;</span><span class="p">,</span> <span class="n">key_trie</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>[‘shanghai, shanghai, china’,<br />’shangqiu, henan, china’,<br />’shantou, guangdong, china’,<br />’shangrao, jiangxi, china’,<br />’sharjah, ash shāriqah, united arab emirates’]</p>
+<p>[‘shanghai, shanghai, china’,<br/>
+‘shangqiu, henan, china’,<br/>
+‘shantou, guangdong, china’,<br/>
+‘shangrao, jiangxi, china’,<br/>
+‘sharjah, ash shāriqah, united arab emirates’]</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">suggest</span><span class="p">(</span><span class="s2">&quot;ber&quot;</span><span class="p">,</span> <span class="n">key_trie</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>[‘berlin, berlin, germany’,<br />’bern, bern, switzerland’,<br />’bertoua, est, cameroon’,<br />’bergen, hordaland, norway’,<br />’bergamo, lombardy, italy’]</p>
-<p>To be notice, here we use the population as the score to sort the suggestions. What need to be improved is just to re compute the score by consider more factors.</p>
+<p>[‘berlin, berlin, germany’,<br/>
+‘bern, bern, switzerland’,<br/>
+‘bertoua, est, cameroon’,<br/>
+‘bergen, hordaland, norway’,<br/>
+‘bergamo, lombardy, italy’]</p>
+<p>To be notice, here we use the population as the score to sort the suggestions. What need to be improved is just to re compute the scores by consider more factors.</p>
 </div>
 <div class="section" id="feature-extraction">
 <h2>Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h2>
@@ -243,7 +255,9 @@ It is super powerful for some tasks like autocomplete and feature extraction in 
 <span class="n">regex</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>CPU times: user 14 µs, sys: 0 ns, total: 14 µs<br />Wall time: 17.9 µs<br />[‘Paris’, ‘Munich’, ‘Berlin’]</p>
+<p>CPU times: user 14 µs, sys: 0 ns, total: 14 µs<br/>
+Wall time: 17.9 µs<br/>
+[‘Paris’, ‘Munich’, ‘Berlin’]</p>
 <p><strong>Large key set</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">large_keys</span> <span class="o">=</span> <span class="n">input_df</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">values</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">large_keys</span><span class="p">))</span>
@@ -255,14 +269,16 @@ It is super powerful for some tasks like autocomplete and feature extraction in 
 <span class="n">regex_large</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>CPU times: user 64 µs, sys: 1e+03 ns, total: 65 µs<br />Wall time: 67.7 µs<br />[‘Amsterdam’, ‘Van’, ‘Paris’, ‘Munich’, ‘Berlin’]</p>
-<p>Super fast! However, we have a wrong result Van, which is not a city. To avoid this ambiguity, more sophistical method are required.</p>
+<p>CPU times: user 64 µs, sys: 1e+03 ns, total: 65 µs<br/>
+Wall time: 67.7 µs<br/>
+[‘Amsterdam’, ‘Van’, ‘Paris’, ‘Munich’, ‘Berlin’]</p>
+<p>Super fast! However, we have a wrong result Van, which is not a city. To avoid this ambiguity, more sophistical methods are required.</p>
 <p><strong>References</strong></p>
 <ul class="simple">
-<li><p>Intro to Trie: https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014</p></li>
-<li><p>pytrie: https://pytrie.readthedocs.io/en/latest/</p></li>
-<li><p>Trie script: https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0</p></li>
-<li><p>City data : https://simplemaps.com/data/world-cities</p></li>
+<li><p>Intro to Trie: <a class="reference external" href="https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014">https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014</a></p></li>
+<li><p>pytrie package: <a class="reference external" href="https://pytrie.readthedocs.io/en/latest/">https://pytrie.readthedocs.io/en/latest/</a></p></li>
+<li><p>Trie script: <a class="reference external" href="https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0">https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0</a></p></li>
+<li><p>City data : <a class="reference external" href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a></p></li>
 </ul>
 </div>
 </div>
