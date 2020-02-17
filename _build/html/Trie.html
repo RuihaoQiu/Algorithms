@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Trie &mdash; algorithms  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Graph searching algorithm" href="Graph-search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> algorithms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Sorting.html">Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Searching.html">Searching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graph-search.html">Graph searching algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graph-search.html#sampling-method">Sampling method</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Trie</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#autocomplete">Autocomplete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#feature-extraction">Feature extraction</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">algorithms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Trie</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Trie.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="trie">
+<h1>Trie<a class="headerlink" href="#trie" title="Permalink to this headline">¶</a></h1>
+<p>A trie is a tree-like data structure whose nodes store the letters of an alphabet.
+It is super powerful for some tasks like autocomplete and feature extraction in ML applications.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">pytrie</span> <span class="k">import</span> <span class="n">StringTrie</span>
+</pre></div>
+</div>
+<div class="section" id="autocomplete">
+<h2>Autocomplete<a class="headerlink" href="#autocomplete" title="Permalink to this headline">¶</a></h2>
+<p>Suggest the complete word/phrase for any prefix input.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">suggest</span><span class="p">(</span><span class="n">input_str</span><span class="p">,</span> <span class="n">key_trie</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;autocomplete the input_str, show the top_n suggestions with highest score</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">input_low</span> <span class="o">=</span> <span class="n">input_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">out_items</span> <span class="o">=</span> <span class="n">key_trie</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="n">input_low</span><span class="p">)</span>
+    <span class="n">out_sort</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">out_items</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">out_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">out_sort</span><span class="p">[:</span><span class="n">top_n</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">out_list</span>
+</pre></div>
+</div>
+<p><strong>Simple example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">key_dict</span> <span class="o">=</span>  <span class="nb">dict</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;hell&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span>  
+        <span class="s2">&quot;hel&quot;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;help&quot;</span><span class="p">:</span><span class="mi">33</span><span class="p">,</span> <span class="s2">&quot;helps&quot;</span><span class="p">:</span><span class="mi">47</span><span class="p">,</span> <span class="s2">&quot;helping&quot;</span><span class="p">:</span><span class="mi">40</span><span class="p">})</span>
+<span class="n">key_trie</span> <span class="o">=</span> <span class="n">StringTrie</span><span class="p">(</span><span class="n">key_dict</span><span class="p">)</span>
+<span class="n">suggest</span><span class="p">(</span><span class="s2">&quot;hel&quot;</span><span class="p">,</span> <span class="n">key_trie</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>[‘helps’, ‘helping’, ‘help’, ‘hell’, ‘hel’, ‘hello’]</p>
+<p><strong>Practical example - location autocomplete</strong><br />Work with world cities data, <a class="reference external" href="https://simplemaps.com/data/world-cities">find here</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">input_file</span> <span class="o">=</span> <span class="s2">&quot;data/worldcities.xlsx&quot;</span>
+<span class="n">input_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>make trie structure</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_trie</span><span class="p">(</span><span class="n">input_df</span><span class="p">):</span>
+    <span class="n">input_df</span><span class="p">[</span><span class="s2">&quot;fullname&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_df</span><span class="p">[[</span><span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;admin_name&quot;</span><span class="p">,</span> <span class="s2">&quot;country&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">input_df</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_df</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">out_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">input_df</span><span class="o">.</span><span class="n">fullname</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">input_df</span><span class="o">.</span><span class="n">population</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">StringTrie</span><span class="p">(</span><span class="n">key_dict</span><span class="p">)</span>
+
+<span class="n">key_trie</span> <span class="o">=</span> <span class="n">make_trie</span><span class="p">(</span><span class="n">input_df</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">suggest</span><span class="p">(</span><span class="s2">&quot;par&quot;</span><span class="p">,</span> <span class="n">key_trie</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>[‘paris, île-de-france, france’,<br />’parbhani, mahārāshtra, india’,<br />’paraná, entre ríos, argentina’,<br />’paramaribo, paramaribo, suriname’,<br />’paradise, nevada, united states’]<br />*(*<em>find city called ‘paradise’ in US)</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">suggest</span><span class="p">(</span><span class="s2">&quot;sha&quot;</span><span class="p">,</span> <span class="n">key_trie</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>[‘shanghai, shanghai, china’,<br />’shangqiu, henan, china’,<br />’shantou, guangdong, china’,<br />’shangrao, jiangxi, china’,<br />’sharjah, ash shāriqah, united arab emirates’]</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">suggest</span><span class="p">(</span><span class="s2">&quot;ber&quot;</span><span class="p">,</span> <span class="n">key_trie</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>[‘berlin, berlin, germany’,<br />’bern, bern, switzerland’,<br />’bertoua, est, cameroon’,<br />’bergen, hordaland, norway’,<br />’bergamo, lombardy, italy’]</p>
+<p>To be notice, here we use the population as the score to sort the suggestions. What need to be improved is just to re compute the score by consider more factors.</p>
+</div>
+<div class="section" id="feature-extraction">
+<h2>Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h2>
+<p>When we want to search a large amount of keywords from one/many text. Trie structure become super powerful. It is the opposite way to implement the Trie from above.</p>
+<p>Import a script <code class="docutils literal notranslate"><span class="pre">Trie.py</span></code>, which you can find <a class="reference external" href="https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0">here</a>, also feel free to use other packages.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Trie</span> <span class="k">import</span> <span class="n">Trie</span>
+</pre></div>
+</div>
+<p><strong>Make regex from trie</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Amsterdam - Van Gogh Museum</span>
+<span class="s2">Paris –  Eiffel tower, Louvre Museum</span>
+<span class="s2">Munich – Oktoberfest</span>
+<span class="s2">Berlin – Zoo etc.&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_regex</span><span class="p">(</span><span class="n">input_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Build regex from trie structure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">input_list</span><span class="p">:</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\b&quot;</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">pattern</span><span class="p">()</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;\b&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">regex</span>
+</pre></div>
+</div>
+<p><strong>Small key set</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">small_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;munich&quot;</span><span class="p">,</span> <span class="s2">&quot;paris&quot;</span><span class="p">,</span> <span class="s2">&quot;berlin&quot;</span><span class="p">,</span> <span class="s2">&quot;brussels&quot;</span><span class="p">]</span>
+<span class="n">regex</span> <span class="o">=</span> <span class="n">make_regex</span><span class="p">(</span><span class="n">small_keys</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">time</span>
+<span class="n">regex</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>CPU times: user 14 µs, sys: 0 ns, total: 14 µs<br />Wall time: 17.9 µs<br />[‘Paris’, ‘Munich’, ‘Berlin’]</p>
+<p><strong>Large key set</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">large_keys</span> <span class="o">=</span> <span class="n">input_df</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">values</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">large_keys</span><span class="p">))</span>
+<span class="n">regex_large</span> <span class="o">=</span> <span class="n">make_regex</span><span class="p">(</span><span class="n">large_keys</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>15493</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">time</span>
+<span class="n">regex_large</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>CPU times: user 64 µs, sys: 1e+03 ns, total: 65 µs<br />Wall time: 67.7 µs<br />[‘Amsterdam’, ‘Van’, ‘Paris’, ‘Munich’, ‘Berlin’]</p>
+<p>Super fast! However, we have a wrong result Van, which is not a city. To avoid this ambiguity, more sophistical method are required.</p>
+<p><strong>References</strong></p>
+<ul class="simple">
+<li><p>Intro to Trie: https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014</p></li>
+<li><p>pytrie: https://pytrie.readthedocs.io/en/latest/</p></li>
+<li><p>Trie script: https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0</p></li>
+<li><p>City data : https://simplemaps.com/data/world-cities</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="Graph-search.html" class="btn btn-neutral" title="Graph searching algorithm" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Ruihao Qiu.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

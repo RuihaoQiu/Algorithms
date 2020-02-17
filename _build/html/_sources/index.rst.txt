@@ -1,9 +1,12 @@
-Python notes
+Algorithms and data structure
 ================================
-This document includes the practical knowledge, concepts, ideas and tricks of Python that often appear in my daily data engineering/science work.
+This document contains the code and practical use cases of different algorithms and data structure. 
 
 .. toctree::
    :maxdepth: 2
    :glob:
 
    Sorting
+   Searching
+   Graph-search
+   Trie
