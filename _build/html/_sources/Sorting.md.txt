@@ -47,7 +47,7 @@ def insertion_sort(X):
 print("Before sort: ", A)
 print("After sort: ", insertion_sort(A))
 ```
-Before sort:  [5, 0, 3, 4, 9, 8, 7, 2, 1, 6]  
+Before sort:  [5, 0, 3, 4, 9, 8, 7, 2, 1, 6]  <br/>
 After sort:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 **selection sort** - from left to right, find the minimum of the right part stack to the left
