@@ -9,3 +9,4 @@ This document contains the code and practical use cases of different algorithms 
    Sorting
    Searching
    Graph-search
+   Trie
