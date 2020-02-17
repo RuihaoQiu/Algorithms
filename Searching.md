@@ -1,4 +1,4 @@
-## Searching algorithms
+## Searching
 
 ### Linear search
 search from left to right, return index when match, O(N)
