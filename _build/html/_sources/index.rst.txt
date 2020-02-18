@@ -10,3 +10,4 @@ This document contains the code and practical use cases of different algorithms 
    Searching
    Graph-search
    Trie
+   Simhash
