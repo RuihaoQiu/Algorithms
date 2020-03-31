@@ -4,15 +4,15 @@ In computer science, SimHash is a technique for quickly estimating how similar t
 
 ### Explain the algorithm
 - set the hashsize, ex. 64 bits, initialize them all zero
-- break the phrase up into features (shingles)  
-'the cat sat on the mat'  </b>
-\-> {"th", "he", "e ", " c", "ca", "at", "t ",</b>
-    " s", "sa", " o", "on", "n ", " t", " m", "ma"}</b>
-- hash each feature using a normal 64-bit hash algorithm ex. md5</b>  
-"th" -> 10010010...</b>  
-"he" -> 10010110...</b>  
-- set 0 to -1, sum each bit, got a sequence like : [-4 4 0 5 6 -1 -4 ...](64 bits)
-- generate simhash, by setting 1: T[i]>0, 0: T[i]<0: [0 1 1 1 1 0 0 ...](64 bits)
+- break the phrase up into features (shingles)<br>
+'the cat sat on the mat'<br>
+\-> {"th", "he", "e ", " c", "ca", "at", "t ",<br>
+    " s", "sa", " o", "on", "n ", " t", " m", "ma"}<br>
+- hash each feature using a normal 64-bit hash algorithm ex. md5<br>
+"th" -> 10010010...<br>
+"he" -> 10010110...<br>
+- set 0 to -1, sum each bit, got a sequence like : [-4 4 0 5 6 -1 -4 ...] (64 bits)
+- generate simhash, by setting 1: T[i]>0, 0: T[i]<0: [0 1 1 1 1 0 0 ...] (64 bits)
 
 ### Make simhash
 ```
