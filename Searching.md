@@ -1,7 +1,7 @@
 ## Searching
 
 ### Linear search
-search from left to right, return index when match, O(N)
+Search from left to right, return index when match, O(N)
 ```
 def linear_search(X, x):
   for i in range(len(X)):
@@ -11,7 +11,7 @@ def linear_search(X, x):
 ```
 
 ### Binary search
-only for sorted array, repeatedly dividing the search interval in half, O(logN)
+Only for sorted array, repeatedly dividing the search interval in half, O(logN)
 ```
 def binary_search(X, x, l, r):
   if r >= l:

@@ -6,8 +6,7 @@ In computer science, SimHash is a technique for quickly estimating how similar t
 - set the hashsize, ex. 64 bits, initialize them all zero
 - break the phrase up into features (shingles)<br>
 'the cat sat on the mat'<br>
-\-> {"th", "he", "e ", " c", "ca", "at", "t ",<br>
-    " s", "sa", " o", "on", "n ", " t", " m", "ma"}<br>
+\-> {"th", "he", "e ", " c", "ca", "at", "t "," s", "sa", " o", "on", "n ", " t", " m", "ma"}<br>
 - hash each feature using a normal 64-bit hash algorithm ex. md5<br>
 "th" -> 10010010...<br>
 "he" -> 10010110...<br>
@@ -39,7 +38,7 @@ make_simhash("hello world")
 13548364882372308181
 
 ### Difference between two strings
-calculate number of different bits from two strings
+Calculate number of different bits from two strings.
 ```
 text_1 = "Good job"
 text_2 = "Good job, Ray"
@@ -48,7 +47,7 @@ Simhash(text_1).distance(Simhash(text_2))
 ```
 14
 
-calculate number of different bits from two hashes
+Calculate number of different bits from two hashes.
 ```
 hash_1 = Simhash(text_1).value
 hash_2 = Simhash(text_2).value

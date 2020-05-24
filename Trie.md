@@ -38,7 +38,7 @@ input_file = "data/worldcities.xlsx"
 input_df = pd.read_excel(input_file)
 ```
 
-make trie structure
+Make trie structure
 ```
 def make_trie(input_df):
     input_df["fullname"] = input_df[["city", "admin_name", "country"]].apply(lambda x: ', '.join(x.astype(str).str.lower()), axis=1)
